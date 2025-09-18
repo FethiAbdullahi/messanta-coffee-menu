@@ -128,7 +128,7 @@ const CategorySection = ({ category, products, showAll = false }: CategorySectio
                 transition: { duration: 0.2 }
               }}
             >
-              <ProductCard product={product} categoryId={category.id} />
+              <ProductCard product={product} />
             </motion.div>
           ))}
         </div>

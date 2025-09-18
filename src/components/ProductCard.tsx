@@ -1,15 +1,14 @@
 import { motion } from 'framer-motion'
-import { Link } from 'react-router-dom'
+// import { Link } from 'react-router-dom'
 import { Product } from '../types/database'
 import { formatPrice } from '../lib/utils'
 import { Star, Heart, Eye } from 'lucide-react'
 
 interface ProductCardProps {
   product: Product
-  categoryId: string
 }
 
-const ProductCard = ({ product, categoryId }: ProductCardProps) => {
+const ProductCard = ({ product }: ProductCardProps) => {
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}

@@ -106,7 +106,7 @@ const CategoryPage = () => {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: index * 0.1 }}
                 >
-                  <ProductCard product={product} categoryId={category.id} />
+                  <ProductCard product={product} />
                 </motion.div>
               ))}
             </div>
