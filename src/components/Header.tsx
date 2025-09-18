@@ -47,16 +47,16 @@ const Header = () => {
           : 'bg-transparent'
       )}
     >
-      <div className="container mx-auto px-4 py-4">
+      <div className="container mx-auto px-4 py-3 sm:py-4">
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <Link to="/" className="flex items-center space-x-3">
+          <Link to="/" className="flex items-center space-x-2 sm:space-x-3">
             <img 
               src="/Messenta.png"
               alt="Messanta Coffee" 
-              className="h-12 w-12 object-contain"
+              className="h-8 w-8 sm:h-10 sm:w-10 md:h-12 md:w-12 object-contain"
             />
-            <span className="text-2xl font-sora font-bold text-gradient">
+            <span className="text-lg sm:text-xl md:text-2xl font-sora font-bold text-gradient">
               Messanta Coffee
             </span>
           </Link>

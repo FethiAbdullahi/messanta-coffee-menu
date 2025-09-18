@@ -50,7 +50,7 @@ const LandingPage = () => {
         </div>
 
         {/* Main Content Container */}
-        <div className="relative z-10 min-h-screen flex items-center">
+        <div className="relative z-10 min-h-screen flex items-center pt-20 md:pt-24">
           <div className="container mx-auto px-4">
             <div className="max-w-4xl mx-auto text-center">
               
@@ -61,17 +61,17 @@ const LandingPage = () => {
                 transition={{ duration: 0.8 }}
                 className="text-white"
               >
-                <h1 className="text-6xl md:text-8xl font-sora font-bold mb-8 leading-tight">
+                <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-sora font-bold mb-6 md:mb-8 leading-tight">
                   <span className="block">Start Your Morning With</span>
                   <span className="block text-yellow-400">Coffee</span>
                 </h1>
                 
-                <p className="text-xl md:text-2xl text-gray-200 font-sora font-light mb-8 leading-relaxed max-w-3xl mx-auto">
+                <p className="text-lg sm:text-xl md:text-2xl text-gray-200 font-sora font-light mb-6 md:mb-8 leading-relaxed max-w-3xl mx-auto px-4">
                   Experience the rich heritage of culture through our carefully crafted coffee blends. 
                   A journey of taste that connects tradition with modern coffee culture.
                 </p>
                 
-                <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
+                <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center mb-8 md:mb-12 px-4">
                   <button 
                     onClick={() => {
                       const menuSection = document.querySelector('#menu')
@@ -79,7 +79,7 @@ const LandingPage = () => {
                         menuSection.scrollIntoView({ behavior: 'smooth' })
                       }
                     }}
-                    className="px-8 py-4 bg-gradient-to-r from-yellow-400 to-amber-500 text-black font-sora font-semibold rounded-lg hover:from-yellow-500 hover:to-amber-600 transition-all duration-300 text-lg shadow-lg hover:shadow-xl transform hover:scale-105"
+                    className="px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-yellow-400 to-amber-500 text-black font-sora font-semibold rounded-lg hover:from-yellow-500 hover:to-amber-600 transition-all duration-300 text-base sm:text-lg shadow-lg hover:shadow-xl transform hover:scale-105"
                   >
                     ORDER NOW
                   </button>
@@ -90,31 +90,31 @@ const LandingPage = () => {
                         aboutSection.scrollIntoView({ behavior: 'smooth' })
                       }
                     }}
-                    className="px-8 py-4 border-2 border-white text-white font-sora font-semibold rounded-lg hover:bg-white hover:text-black transition-all duration-300 text-lg"
+                    className="px-6 sm:px-8 py-3 sm:py-4 border-2 border-white text-white font-sora font-semibold rounded-lg hover:bg-white hover:text-black transition-all duration-300 text-base sm:text-lg"
                   >
                     READ MORE
                   </button>
                 </div>
 
                 {/* Contact Info */}
-                <div className="flex flex-col sm:flex-row gap-8 justify-center text-gray-200">
+                <div className="flex flex-col sm:flex-row gap-4 sm:gap-8 justify-center text-gray-200 px-4">
                   <div className="flex items-center justify-center space-x-3">
-                    <Phone className="h-6 w-6 text-yellow-400" />
+                    <Phone className="h-5 w-5 sm:h-6 sm:w-6 text-yellow-400" />
                     <div className="flex flex-col">
-                      <a href="tel:01132000071" className="text-lg font-sora font-light hover:underline">
+                      <a href="tel:01132000071" className="text-sm sm:text-lg font-sora font-light hover:underline">
                         011 3 20 00 071
                       </a>
-                      <a href="tel:+251903018011" className="text-lg font-sora font-light hover:underline">
+                      <a href="tel:+251903018011" className="text-sm sm:text-lg font-sora font-light hover:underline">
                         +251 903 01 80 11
                       </a>
                     </div>
                   </div>
                   <div className="flex items-center justify-center space-x-3">
-                    <Mail className="h-6 w-6 text-yellow-400" />
+                    <Mail className="h-5 w-5 sm:h-6 sm:w-6 text-yellow-400" />
                     <div className="flex flex-col">
                       <a
                         href="mailto:info@messanta.unitedfurniture.et"
-                        className="text-lg font-sora font-light hover:underline"
+                        className="text-sm sm:text-lg font-sora font-light hover:underline break-all"
                       >
                         info@messanta.unitedfurniture.et
                       </a>
