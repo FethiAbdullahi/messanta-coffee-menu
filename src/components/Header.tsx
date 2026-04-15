@@ -13,7 +13,8 @@ const Header = () => {
       setIsScrolled(window.scrollY > 20)
     }
 
-    window.addEventListener('scroll', handleScroll)
+    handleScroll()
+    window.addEventListener('scroll', handleScroll, { passive: true })
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
@@ -43,7 +44,7 @@ const Header = () => {
       className={cn(
         'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
         isScrolled
-          ? 'glass-effect shadow-lg'
+          ? 'glass-effect shadow-lg border-b border-white/10'
           : 'bg-transparent'
       )}
     >
@@ -70,7 +71,12 @@ const Header = () => {
               <button
                 key={item.name}
                 onClick={() => scrollToSection(item.href)}
-                className="text-gray-700 hover:text-primary-600 transition-colors duration-200 font-medium"
+                className={cn(
+                  'transition-colors duration-200 font-medium drop-shadow-sm',
+                  isScrolled
+                    ? 'text-gray-800 hover:text-primary-600'
+                    : 'text-white hover:text-yellow-300'
+                )}
               >
                 {item.name}
               </button>
@@ -80,7 +86,11 @@ const Header = () => {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="md:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors"
+            className={cn(
+              'md:hidden p-2 rounded-lg transition-colors',
+              isScrolled ? 'text-gray-800 hover:bg-black/5' : 'text-white hover:bg-white/10'
+            )}
+            aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
           >
             {isMobileMenuOpen ? (
               <X className="h-6 w-6" />
@@ -96,14 +106,24 @@ const Header = () => {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden mt-4 py-4 border-t border-gray-200"
+            className={cn(
+              'md:hidden mt-4 rounded-xl py-4 px-2 border shadow-lg',
+              isScrolled
+                ? 'border-gray-200/80 bg-white/95 backdrop-blur-md'
+                : 'border-white/20 bg-black/50 backdrop-blur-md'
+            )}
           >
-            <div className="flex flex-col space-y-4">
+            <div className="flex flex-col space-y-1">
               {navItems.map((item) => (
                 <button
                   key={item.name}
                   onClick={() => scrollToSection(item.href)}
-                  className="text-gray-700 hover:text-primary-600 transition-colors duration-200 font-medium py-2 text-left"
+                  className={cn(
+                    'transition-colors duration-200 font-medium py-3 px-3 text-left rounded-lg',
+                    isScrolled
+                      ? 'text-gray-800 hover:bg-primary-50 hover:text-primary-600'
+                      : 'text-white hover:bg-white/10 hover:text-yellow-300'
+                  )}
                 >
                   {item.name}
                 </button>
