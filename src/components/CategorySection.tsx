@@ -1,16 +1,19 @@
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
-import { Category, Product } from '../types/database'
+import { Category, Product, DailyDiscount, DailySpecial } from '../types/database'
 import ProductCard from './ProductCard'
 import { Coffee, ArrowRight, Star } from 'lucide-react'
+import { getProductDiscount, getProductSpecial } from '../hooks/useSupabase'
 
 interface CategorySectionProps {
   category: Category
   products: Product[]
+  discounts?: DailyDiscount[]
+  specials?: DailySpecial[]
   showAll?: boolean
 }
 
-const CategorySection = ({ category, products, showAll = false }: CategorySectionProps) => {
+const CategorySection = ({ category, products, discounts = [], specials = [], showAll = false }: CategorySectionProps) => {
   const displayProducts = showAll ? products : products.slice(0, 4)
 
   // Category-specific styling and icons
@@ -128,7 +131,11 @@ const CategorySection = ({ category, products, showAll = false }: CategorySectio
                 transition: { duration: 0.2 }
               }}
             >
-              <ProductCard product={product} />
+              <ProductCard 
+                product={product}
+                discount={getProductDiscount(product.id, discounts)}
+                special={getProductSpecial(product.id, specials)}
+              />
             </motion.div>
           ))}
         </div>

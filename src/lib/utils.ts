@@ -19,3 +19,13 @@ export function slugify(text: string): string {
     .replace(/[\s_-]+/g, '-')
     .replace(/^-+|-+$/g, '')
 }
+
+/** Vite serves `public/` at site root — `public/foo.webp` must be `/foo.webp` for <img src>. */
+export function resolveProductImageUrl(url: string | null | undefined): string {
+  if (!url?.trim()) return ''
+  const u = url.trim()
+  if (u.startsWith('http://') || u.startsWith('https://')) return u
+  if (u.startsWith('public/')) return `/${u.slice('public/'.length)}`
+  if (u.startsWith('/')) return u
+  return `/${u.replace(/^\.?\//, '')}`
+}

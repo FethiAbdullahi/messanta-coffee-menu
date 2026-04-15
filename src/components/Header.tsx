@@ -55,6 +55,9 @@ const Header = () => {
               src="/Messenta.png"
               alt="Messanta Coffee" 
               className="h-8 w-8 sm:h-10 sm:w-10 md:h-12 md:w-12 object-contain"
+              loading="eager"
+              decoding="async"
+              fetchPriority="high"
             />
             <span className="text-lg sm:text-xl md:text-2xl font-sora font-bold text-gradient">
               Messanta Coffee

@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { Toaster } from 'react-hot-toast'
 import LandingPage from './pages/LandingPage'
 import CategoryPage from './pages/CategoryPage'
+import AdminDashboard from './pages/AdminDashboard'
 import { SupabaseProvider } from './lib/supabase'
 
 function App() {
@@ -13,6 +14,7 @@ function App() {
           <Routes>
             <Route path="/" element={<LandingPage />} />
             <Route path="/category/:categoryId" element={<CategoryPage />} />
+            <Route path="/admin" element={<AdminDashboard />} />
           </Routes>
           <Toaster 
             position="top-right"

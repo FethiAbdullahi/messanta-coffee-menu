@@ -1,14 +1,20 @@
 import { motion } from 'framer-motion'
-// import { Link } from 'react-router-dom'
-import { Product } from '../types/database'
-import { formatPrice } from '../lib/utils'
+import { Product, DailyDiscount, DailySpecial } from '../types/database'
+import { formatPrice, resolveProductImageUrl } from '../lib/utils'
 import { Star, Heart, Eye } from 'lucide-react'
+import DiscountBadge, { SpecialBadge } from './DiscountBadge'
+import { calculateDiscountedPrice } from '../hooks/useSupabase'
 
 interface ProductCardProps {
   product: Product
+  discount?: DailyDiscount | null
+  special?: DailySpecial | null
 }
 
-const ProductCard = ({ product }: ProductCardProps) => {
+const ProductCard = ({ product, discount, special }: ProductCardProps) => {
+  const discountedPrice = calculateDiscountedPrice(product.price, discount || null)
+  const hasDiscount = discount && discountedPrice < product.price
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -24,9 +30,11 @@ const ProductCard = ({ product }: ProductCardProps) => {
       <div className="relative aspect-square overflow-hidden">
         {product.image_url ? (
           <img
-            src={product.image_url}
+            src={resolveProductImageUrl(product.image_url)}
             alt={product.name}
             className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+            loading="eager"
+            decoding="async"
           />
         ) : (
           <div className="w-full h-full bg-gradient-to-br from-amber-100 via-orange-100 to-red-100 flex items-center justify-center">
@@ -37,7 +45,17 @@ const ProductCard = ({ product }: ProductCardProps) => {
         {/* Gradient Overlay */}
         <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
         
-        {/* Action Buttons */}
+        {/* Badges - Top Left */}
+        <div className="absolute top-4 left-4 flex flex-col space-y-2">
+          {hasDiscount && (
+            <DiscountBadge discount={discount} size="sm" />
+          )}
+          {special && (
+            <SpecialBadge label={special.special_label} size="sm" />
+          )}
+        </div>
+
+        {/* Action Buttons - Top Right */}
         <div className="absolute top-4 right-4 flex flex-col space-y-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
           <button className="p-2 bg-white/90 backdrop-blur-sm rounded-full shadow-lg hover:bg-white transition-colors duration-200">
             <Heart className="h-4 w-4 text-gray-600 hover:text-red-500" />
@@ -46,13 +64,6 @@ const ProductCard = ({ product }: ProductCardProps) => {
             <Eye className="h-4 w-4 text-gray-600 hover:text-blue-500" />
           </button>
         </div>
-
-        {/* Premium Badge */}
-        {/* <div className="absolute top-4 left-4">
-          <div className="bg-gradient-to-r from-yellow-400 to-amber-500 text-white px-3 py-1 rounded-full text-xs font-sora font-semibold shadow-lg">
-            Premium
-          </div>
-        </div> */}
       </div>
       
       {/* Content */}
@@ -80,25 +91,27 @@ const ProductCard = ({ product }: ProductCardProps) => {
         {/* Price and Action */}
         <div className="flex items-center justify-between">
           <div className="flex flex-col">
-            <span className="text-2xl font-sora font-bold text-gray-900">
-              {formatPrice(product.price)}
-            </span>
-            <span className="text-xs text-gray-500 font-sora font-light">per serving</span>
+            {hasDiscount ? (
+              <>
+                <div className="flex items-center space-x-2">
+                  <span className="text-2xl font-sora font-bold text-red-600">
+                    {formatPrice(discountedPrice)}
+                  </span>
+                  <span className="text-lg font-sora font-medium text-gray-400 line-through">
+                    {formatPrice(product.price)}
+                  </span>
+                </div>
+                <span className="text-xs text-red-500 font-sora font-medium">Special Price!</span>
+              </>
+            ) : (
+              <>
+                <span className="text-2xl font-sora font-bold text-gray-900">
+                  {formatPrice(product.price)}
+                </span>
+                <span className="text-xs text-gray-500 font-sora font-light">per serving</span>
+              </>
+            )}
           </div>
-          
-          {/* <Link
-            to={`/category/${categoryId}`}
-            className="group/btn inline-flex items-center px-6 py-3 bg-gradient-to-r from-amber-500 to-orange-500 text-white font-sora font-semibold rounded-xl hover:from-amber-600 hover:to-orange-600 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-105"
-          >
-            <span className="text-sm">Order Now</span>
-            <motion.span
-              className="ml-2"
-              whileHover={{ x: 3 }}
-              transition={{ duration: 0.2 }}
-            >
-              →
-            </motion.span>
-          </Link> */}
         </div>
       </div>
 

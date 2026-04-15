@@ -4,11 +4,13 @@ import Header from '../components/Header'
 import Footer from '../components/Footer'
 import CategorySection from '../components/CategorySection'
 import CountingNumber from '../components/CountingNumber'
-import { useCategories, useProducts } from '../hooks/useSupabase'
+import { useCategories, useProducts, useDailyDiscounts, useDailySpecials } from '../hooks/useSupabase'
 
 const LandingPage = () => {
   const { categories, loading: categoriesLoading } = useCategories()
   const { products: allProducts, loading: productsLoading } = useProducts()
+  const { discounts } = useDailyDiscounts()
+  const { specials } = useDailySpecials()
 
 
   // Group products by category
@@ -40,7 +42,7 @@ const LandingPage = () => {
           <div 
             className="absolute inset-0 bg-cover bg-center bg-no-repeat"
             style={{
-              backgroundImage: `url('/delicious-coffee-cup-indoors.jpg')`,
+              backgroundImage: `url('/delicious-coffee-cup-indoors.webp')`,
               filter: 'brightness(0.6) contrast(1.1)'
             }}
           ></div> 
@@ -196,6 +198,8 @@ const LandingPage = () => {
               key={category.id}
               category={category}
               products={productsByCategory[category.id] || []}
+              discounts={discounts}
+              specials={specials}
             />
           ))
         )}
@@ -318,7 +322,7 @@ const LandingPage = () => {
                     {[
                       { number: 3, suffix: '+', label: 'Years of Excellence', description: 'Serving the community' },
                       { number: 10, suffix: '+', label: 'Coffee Varieties', description: 'Unique blends available' },
-                      { number: 1000, suffi1x: '+', label: 'Happy Customers', description: 'Satisfied coffee lovers' },
+                      { number: 1000, suffix: '+', label: 'Happy Customers', description: 'Satisfied coffee lovers' },
                       { number: 24, suffix: '/7', label: 'Coffee Passion', description: 'Always brewing' }
                     ].map((stat, index) => (
                       <motion.div
