@@ -4,7 +4,7 @@ import { QRCodeSVG } from 'qrcode.react'
 
 // Google Place ID for Messanta Coffee - Update this with your actual Place ID
 // To find your Place ID: https://developers.google.com/maps/documentation/places/web-service/place-id
-const GOOGLE_PLACE_ID = 'ChIJIS1w0qGHLxcRPo9e0dOtR_M' // Messanta Coffee Addis Ababa
+const GOOGLE_PLACE_ID = 'ChIJIQ1w0qGHSxYRPo9ePbStR_M' // Messanta Coffee Addis Ababa
 
 const Footer = () => {
   const currentUrl = window.location.origin
