@@ -1,13 +1,11 @@
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Product, DailyDiscount, DailySpecial } from '../types/database'
 import { formatPrice, resolveProductImageUrl } from '../lib/utils'
-import { Star, ShoppingCart, Zap, ChevronLeft, ChevronRight } from 'lucide-react'
+import { Star, ShoppingCart, Clock, ChevronLeft, ChevronRight } from 'lucide-react'
 import DiscountBadge, { SpecialBadge } from './DiscountBadge'
 import { calculateDiscountedPrice } from '../hooks/useSupabase'
 import { useCart } from '../context/CartContext'
-import { createOrder } from '../lib/orders'
 import toast from 'react-hot-toast'
 
 interface ProductCardProps {
@@ -29,8 +27,6 @@ const ProductCard = ({ product, discount, special }: ProductCardProps) => {
   const effectivePrice = hasDiscount ? discountedPrice : product.price
 
   const { addItem } = useCart()
-  const navigate = useNavigate()
-  const [ordering, setOrdering] = useState(false)
   const [slide, setSlide] = useState(0)
 
   const gallery = getGallery(product)
@@ -46,18 +42,6 @@ const ProductCard = ({ product, discount, special }: ProductCardProps) => {
   const handleAddToCart = () => {
     addItem(cartItem)
     toast.success(`${product.name} added to cart`)
-  }
-
-  const handleOrderNow = async () => {
-    setOrdering(true)
-    try {
-      const order = await createOrder([{ ...cartItem, quantity: 1 }])
-      navigate(`/order/checkout/${order.id}`)
-    } catch (err) {
-      toast.error((err as Error).message || 'Could not place order')
-    } finally {
-      setOrdering(false)
-    }
   }
 
   const prev = (e: React.MouseEvent) => {
@@ -198,12 +182,13 @@ const ProductCard = ({ product, discount, special }: ProductCardProps) => {
             Add
           </button>
           <button
-            onClick={handleOrderNow}
-            disabled={ordering}
-            className="flex-1 flex items-center justify-center gap-2 py-2.5 px-3 bg-gradient-to-r from-yellow-400 to-amber-500 text-black font-sora font-semibold rounded-xl hover:from-yellow-500 hover:to-amber-600 transition-all text-sm disabled:opacity-60"
+            type="button"
+            disabled
+            title="Online ordering coming soon"
+            className="flex-1 flex items-center justify-center gap-1.5 py-2.5 px-2 bg-slate-200 text-slate-500 font-sora font-semibold rounded-xl cursor-not-allowed text-xs sm:text-sm"
           >
-            <Zap className="h-4 w-4" />
-            {ordering ? '...' : 'Order'}
+            <Clock className="h-4 w-4 shrink-0" />
+            <span className="leading-tight text-center">Order Now — Coming Soon</span>
           </button>
         </div>
       </div>
