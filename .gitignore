@@ -14,9 +14,6 @@ dist-ssr/
 menu-photos/*
 !menu-photos/README.md
 
-# Processed menu images (~46MB) — keep local; serve from Vercel/Storage, not Git
-public/menu/
-
 # Logs / debug
 npm-debug.log*
 yarn-debug.log*

@@ -88,6 +88,23 @@ menu-photos/      # Drop new shoot photos here (gitignored); see README inside
 | `node scripts/verify-menu-seed.mjs` | Sanity-check seed SQL vs images |
 | `node scripts/generate-print-qr.mjs` | Printable QR assets |
 
+## Deploy (Vercel)
+
+Vite bakes `VITE_*` into the build. In Vercel → Project → **Settings → Environment Variables**, set all of these for **Production** (then **Redeploy**):
+
+| Variable | Required |
+|----------|----------|
+| `VITE_SUPABASE_URL` | Yes — same project as local `.env` |
+| `VITE_SUPABASE_ANON_KEY` | Yes |
+| `VITE_ADMIN_PASSWORD` | Yes — quote if it contains `#` |
+| `VITE_ADMIN_EMAIL` | Yes — must match Supabase Auth user + `admin_allowlist` |
+
+Without the admin vars, `/admin` will not unlock on production even if it works locally.
+
+Menu photos ship in `public/menu/` with the repo so Vercel can serve `/menu/*.jpg`.
+
+**Database:** Deploying the frontend does **not** insert products. Run the SQL seeds in Supabase SQL Editor (same project the env vars point to) if new items are missing.
+
 ## Adding new menu photos
 
 1. Put originals in `menu-photos/` (gitignored; keep filenames).
