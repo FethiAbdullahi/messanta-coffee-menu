@@ -34,6 +34,7 @@ export interface Database {
           description: string | null
           price: number
           image_url: string | null
+          image_urls?: string[]
           category_id: string
           created_at: string
           updated_at: string
@@ -44,6 +45,7 @@ export interface Database {
           description?: string | null
           price: number
           image_url?: string | null
+          image_urls?: string[]
           category_id: string
           created_at?: string
           updated_at?: string
@@ -54,6 +56,7 @@ export interface Database {
           description?: string | null
           price?: number
           image_url?: string | null
+          image_urls?: string[]
           category_id?: string
           created_at?: string
           updated_at?: string
@@ -128,7 +131,10 @@ export interface Database {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      is_super_admin: {
+        Args: Record<string, never>
+        Returns: boolean
+      }
     }
     Enums: {
       [_ in never]: never

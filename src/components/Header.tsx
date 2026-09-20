@@ -1,12 +1,14 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import { Menu, X } from 'lucide-react'
+import { Menu, X, ShoppingBag } from 'lucide-react'
 import { cn } from '../lib/utils'
+import { useCart } from '../context/CartContext'
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const { itemCount } = useCart()
 
   useEffect(() => {
     const handleScroll = () => {
@@ -81,8 +83,39 @@ const Header = () => {
                 {item.name}
               </button>
             ))}
+            <button
+              onClick={() => window.dispatchEvent(new Event('open-cart'))}
+              className={cn(
+                'relative p-2 rounded-lg transition-colors',
+                isScrolled ? 'text-gray-800 hover:bg-black/5' : 'text-white hover:bg-white/10'
+              )}
+              aria-label="Open cart"
+            >
+              <ShoppingBag className="h-6 w-6" />
+              {itemCount > 0 && (
+                <span className="absolute -top-1 -right-1 h-5 w-5 bg-amber-500 text-black text-xs font-bold rounded-full flex items-center justify-center">
+                  {itemCount}
+                </span>
+              )}
+            </button>
           </nav>
 
+          <div className="flex items-center gap-2 md:hidden">
+            <button
+              onClick={() => window.dispatchEvent(new Event('open-cart'))}
+              className={cn(
+                'relative p-2 rounded-lg transition-colors',
+                isScrolled ? 'text-gray-800 hover:bg-black/5' : 'text-white hover:bg-white/10'
+              )}
+              aria-label="Open cart"
+            >
+              <ShoppingBag className="h-6 w-6" />
+              {itemCount > 0 && (
+                <span className="absolute -top-1 -right-1 h-5 w-5 bg-amber-500 text-black text-xs font-bold rounded-full flex items-center justify-center">
+                  {itemCount}
+                </span>
+              )}
+            </button>
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
@@ -98,6 +131,7 @@ const Header = () => {
               <Menu className="h-6 w-6" />
             )}
           </button>
+          </div>
         </div>
 
         {/* Mobile Navigation */}

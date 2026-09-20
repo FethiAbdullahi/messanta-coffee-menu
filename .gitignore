@@ -10,6 +10,13 @@ dist-ssr/
 .env
 .env.*.local
 
+# Large menu photo drops (keep README only)
+menu-photos/*
+!menu-photos/README.md
+
+# Processed menu images (~46MB) — keep local; serve from Vercel/Storage, not Git
+public/menu/
+
 # Logs / debug
 npm-debug.log*
 yarn-debug.log*

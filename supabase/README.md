@@ -7,6 +7,17 @@ Go to your Supabase Dashboard → **SQL Editor** and run these files **in order*
 1. **`migrations/000_core_menu_schema.sql`** — Creates `categories`, `products`, `admin_allowlist`, `is_super_admin()`, and row-level security so only super admins can change menu data. Seeds `abdullahi.feti23@gmail.com` as the first super admin.
 2. **`migrations/001_add_discounts_specials.sql`** — Creates `daily_discounts` and `daily_specials` (writes restricted to super admins).
 3. **`migrations/002_storage_bucket.sql`** — Creates the `product-images` storage bucket (uploads restricted to super admins).
+4. **`migrations/003_orders.sql`** — Creates `orders`, `order_items`, `staff_allowlist`, staff portal RLS, and payment simulation for testing.
+5. **`migrations/004_image_urls.sql`** — Adds `products.image_urls` for multi-angle carousels.
+6. **`seed/001_seed_existing_menu.sql`** — Inserts existing Messanta menu + Food / Healthy Shakes categories (add-only, no deletes).
+
+See the root **`README.md`** for env vars, admin login, and photo workflow.
+
+### After new photos are in `menu-photos/`
+
+1. Run `node scripts/process-menu-photos.mjs` (already done if agent processed them)
+2. In SQL Editor run **`seed/002_seed_new_photos.sql`** — adds new items + multi-angle galleries
+3. Restart `npm run dev` — images load from `/menu/*`
 
 If you already ran older versions of `001` or `002` (when any logged-in user could write), run the updated files again so policies are replaced.
 
@@ -49,7 +60,17 @@ http://localhost:5173/admin
 
 Sign in with the super admin email and password. Populate **Categories** first, then **Products** (each product needs a `category_id` from your categories).
 
-## 5. Create Storage Bucket Manually (Optional)
+## 5. Order Desk (Staff Portal)
+
+After running migration `003_orders.sql`, open:
+
+```
+http://localhost:5173/orders
+```
+
+Sign in with a staff email from **`staff_allowlist`** (default seed: `abdullahi.feti23@gmail.com`). Paid orders appear in real time across four columns: New → Accepted → Preparing → Ready.
+
+## 6. Create Storage Bucket Manually (Optional)
 
 If the storage migration fails:
 

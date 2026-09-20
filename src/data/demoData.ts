@@ -51,6 +51,7 @@ export const demoProducts: Product[] = [
     description: 'Rich espresso with a dollop of steamed milk',
     price: 140,
     image_url: 'public/Macchiato.webp',
+    image_urls: ['public/Macchiato.webp'],
     category_id: '1',
     created_at: new Date().toISOString(),
     updated_at: new Date().toISOString()
@@ -61,6 +62,7 @@ export const demoProducts: Product[] = [
     description: 'Pure, intense Espresso experience',
     price: 90,
     image_url: 'public/Espresso.webp',
+    image_urls: ['public/Espresso.webp'],
     category_id: '1',
     created_at: new Date().toISOString(),
     updated_at: new Date().toISOString()
@@ -71,6 +73,7 @@ export const demoProducts: Product[] = [
     description: 'Pure, intense House Special Tea experience',
     price: 185,
     image_url: 'public/messanta-tea.webp',
+    image_urls: ['public/messanta-tea.webp'],
     category_id: '1',
     created_at: new Date().toISOString(),
     updated_at: new Date().toISOString()
@@ -81,6 +84,7 @@ export const demoProducts: Product[] = [
     description: 'Rich and creamy Caramel drink',
     price: 230,
     image_url: 'public/hot-caramel.webp',
+    image_urls: ['public/hot-caramel.webp'],
     category_id: '1',
     created_at: new Date().toISOString(),
     updated_at: new Date().toISOString()
@@ -91,6 +95,7 @@ export const demoProducts: Product[] = [
     description: 'Strong tea with espresso notes',
     price: 100,
     image_url: 'https://messanta.unitedfurniture.et/wp-content/uploads/2022/09/Espresso-Tea-scaled.jpg',
+    image_urls: ['https://messanta.unitedfurniture.et/wp-content/uploads/2022/09/Espresso-Tea-scaled.jpg'],
     category_id: '1',
     created_at: new Date().toISOString(),
     updated_at: new Date().toISOString()
@@ -101,6 +106,7 @@ export const demoProducts: Product[] = [
     description: 'Tea with cinnamon, cardamom, and clove seeds',
     price: 120,
     image_url: 'https://messanta.unitedfurniture.et/wp-content/uploads/2022/09/Tea-with-spices-scaled.jpg',
+    image_urls: ['https://messanta.unitedfurniture.et/wp-content/uploads/2022/09/Tea-with-spices-scaled.jpg'],
     category_id: '1',
     created_at: new Date().toISOString(),
     updated_at: new Date().toISOString()
@@ -111,6 +117,7 @@ export const demoProducts: Product[] = [
     description: 'Refreshing tea with fresh lemon',
     price: 100,
     image_url: 'https://messanta.unitedfurniture.et/wp-content/uploads/2022/09/Lemon-Tea-scaled.jpg',
+    image_urls: ['https://messanta.unitedfurniture.et/wp-content/uploads/2022/09/Lemon-Tea-scaled.jpg'],
     category_id: '1',
     created_at: new Date().toISOString(),
     updated_at: new Date().toISOString()
@@ -121,6 +128,7 @@ export const demoProducts: Product[] = [
     description: 'English Breakfast, Chamomile, Darjeeling, Earl Grey, Fennel',
     price: 120,
     image_url: 'https://messanta.unitedfurniture.et/wp-content/uploads/2022/09/Herbal-Tea-Messanta-scaled.jpg',
+    image_urls: ['https://messanta.unitedfurniture.et/wp-content/uploads/2022/09/Herbal-Tea-Messanta-scaled.jpg'],
     category_id: '1',
     created_at: new Date().toISOString(),
     updated_at: new Date().toISOString()
@@ -133,6 +141,7 @@ export const demoProducts: Product[] = [
     description: 'Smooth coffee with caramel syrup and milk over ice',
     price: 270,
     image_url: 'public/Caramel.webp',
+    image_urls: ['public/Caramel.webp'],
     category_id: '2',
     created_at: new Date().toISOString(),
     updated_at: new Date().toISOString()
@@ -143,6 +152,7 @@ export const demoProducts: Product[] = [
     description: 'Smooth coffee with chocolate syrup and milk over ice',
     price: 270,
     image_url: 'public/Chocolate.webp',
+    image_urls: ['public/Chocolate.webp'],
     category_id: '2',
     created_at: new Date().toISOString(),
     updated_at: new Date().toISOString()
@@ -153,6 +163,7 @@ export const demoProducts: Product[] = [
     description: 'Cold coffee served over ice',
     price: 170,
     image_url: 'public/iced-coffee.webp',
+    image_urls: ['public/iced-coffee.webp'],
     category_id: '2',
     created_at: new Date().toISOString(),
     updated_at: new Date().toISOString()
@@ -163,6 +174,7 @@ export const demoProducts: Product[] = [
     description: 'Cold tea served over ice',
     price: 135,
     image_url: 'public/iced-tea.webp',
+    image_urls: ['public/iced-tea.webp'],
     category_id: '2',
     created_at: new Date().toISOString(),
     updated_at: new Date().toISOString()
@@ -173,6 +185,7 @@ export const demoProducts: Product[] = [
     description: 'Cold coffee with milk over ice',
     price: 195,
     image_url: 'public/iced-latte.webp',
+    image_urls: ['public/iced-latte.webp'],
     category_id: '2',
     created_at: new Date().toISOString(),
     updated_at: new Date().toISOString()
@@ -184,7 +197,8 @@ export const demoProducts: Product[] = [
     name: 'Orange Mojito',
     description: 'Fresh orange with mint and soda',
     price: 205,
-    image_url: 'public/Orange.webp',  
+    image_url: 'public/Orange.webp',
+    image_urls: ['public/Orange.webp'],
     category_id: '3',
     created_at: new Date().toISOString(),
     updated_at: new Date().toISOString()
@@ -195,6 +209,7 @@ export const demoProducts: Product[] = [
     description: 'Sweet strawberry with mint and soda',
     price: 205,
     image_url: 'public/Strawberry.webp',
+    image_urls: ['public/Strawberry.webp'],
     category_id: '3',
     created_at: new Date().toISOString(),
     updated_at: new Date().toISOString()
@@ -205,6 +220,7 @@ export const demoProducts: Product[] = [
     description: 'Tropical pineapple with mint and soda',
       price: 205,
     image_url: 'public/Pineapple.webp',
+    image_urls: ['public/Pineapple.webp'],
     category_id: '3',
     created_at: new Date().toISOString(),
     updated_at: new Date().toISOString()
@@ -217,6 +233,7 @@ export const demoProducts: Product[] = [
     description: 'Fresh strawberry smoothie',
     price: 200,
     image_url: 'https://messanta.unitedfurniture.et/wp-content/uploads/2022/09/Strawberry-Smoothie-Messanta-scaled.jpg',
+    image_urls: ['https://messanta.unitedfurniture.et/wp-content/uploads/2022/09/Strawberry-Smoothie-Messanta-scaled.jpg'],
     category_id: '4',
     created_at: new Date().toISOString(),
     updated_at: new Date().toISOString()
@@ -227,6 +244,7 @@ export const demoProducts: Product[] = [
     description: 'Fresh mango with yogurt, milk, and sugar',
     price: 200,
     image_url: 'https://messanta.unitedfurniture.et/wp-content/uploads/2022/09/Mango-Smoothie-Messanta-1-scaled.jpg',
+    image_urls: ['https://messanta.unitedfurniture.et/wp-content/uploads/2022/09/Mango-Smoothie-Messanta-1-scaled.jpg'],
     category_id: '4',
     created_at: new Date().toISOString(),
     updated_at: new Date().toISOString()
@@ -237,6 +255,7 @@ export const demoProducts: Product[] = [
     description: 'Tropical pineapple and mango blend',
     price: 200,
     image_url: 'https://messanta.unitedfurniture.et/wp-content/uploads/2022/09/Pineapple-Mango-Messanta-scaled.jpg',
+    image_urls: ['https://messanta.unitedfurniture.et/wp-content/uploads/2022/09/Pineapple-Mango-Messanta-scaled.jpg'],
     category_id: '4',
     created_at: new Date().toISOString(),
     updated_at: new Date().toISOString()
@@ -247,6 +266,7 @@ export const demoProducts: Product[] = [
     description: 'Healthy dates smoothie',
     price: 200,
     image_url: 'https://messanta.unitedfurniture.et/wp-content/uploads/2022/09/Dates-Smoothie-Messanta-scaled.jpg',
+    image_urls: ['https://messanta.unitedfurniture.et/wp-content/uploads/2022/09/Dates-Smoothie-Messanta-scaled.jpg'],
     category_id: '4',
     created_at: new Date().toISOString(),
     updated_at: new Date().toISOString()
@@ -257,6 +277,7 @@ export const demoProducts: Product[] = [
     description: 'Nutritious dates and flax seed smoothie',
     price: 200,
     image_url: 'https://messanta.unitedfurniture.et/wp-content/uploads/2022/09/Date-Flax-Smoothie-Messanta-scaled.jpg',
+    image_urls: ['https://messanta.unitedfurniture.et/wp-content/uploads/2022/09/Date-Flax-Smoothie-Messanta-scaled.jpg'],
     category_id: '4',
     created_at: new Date().toISOString(),
     updated_at: new Date().toISOString()
@@ -267,6 +288,7 @@ export const demoProducts: Product[] = [
     description: 'Fresh mixed fruit juice',
     price: 200,
     image_url: 'https://messanta.unitedfurniture.et/wp-content/uploads/2022/09/Mixed-Juice-Messanta-scaled.jpg',
+    image_urls: ['https://messanta.unitedfurniture.et/wp-content/uploads/2022/09/Mixed-Juice-Messanta-scaled.jpg'],
     category_id: '4',
     created_at: new Date().toISOString(),
     updated_at: new Date().toISOString()
@@ -277,6 +299,7 @@ export const demoProducts: Product[] = [
     description: 'Creamy mango milkshake',
     price: 200,
     image_url: 'https://messanta.unitedfurniture.et/wp-content/uploads/2022/09/Mango-Milkshake-Messanta-scaled.jpg',
+    image_urls: ['https://messanta.unitedfurniture.et/wp-content/uploads/2022/09/Mango-Milkshake-Messanta-scaled.jpg'],
     category_id: '4',
     created_at: new Date().toISOString(),
     updated_at: new Date().toISOString()
@@ -287,6 +310,7 @@ export const demoProducts: Product[] = [
     description: 'Sweet strawberry milkshake',
     price: 200,
     image_url: 'https://messanta.unitedfurniture.et/wp-content/uploads/2022/09/Strawberry-Milkshake-Messanta-scaled.jpg',
+    image_urls: ['https://messanta.unitedfurniture.et/wp-content/uploads/2022/09/Strawberry-Milkshake-Messanta-scaled.jpg'],
     category_id: '4',
     created_at: new Date().toISOString(),
     updated_at: new Date().toISOString()
@@ -297,6 +321,7 @@ export const demoProducts: Product[] = [
     description: 'Healthy beetroot juice',
     price: 200,
     image_url: 'https://messanta.unitedfurniture.et/wp-content/uploads/2022/09/Beetroot-Messanta-scaled.jpg',
+    image_urls: ['https://messanta.unitedfurniture.et/wp-content/uploads/2022/09/Beetroot-Messanta-scaled.jpg'],
     category_id: '4',
     created_at: new Date().toISOString(),
     updated_at: new Date().toISOString()
@@ -307,6 +332,7 @@ export const demoProducts: Product[] = [
     description: 'Green apple, spinach, milk, and sugar',
     price: 200,
     image_url: 'https://messanta.unitedfurniture.et/wp-content/uploads/2022/09/Green-Juice-Messanta-scaled.jpg',
+    image_urls: ['https://messanta.unitedfurniture.et/wp-content/uploads/2022/09/Green-Juice-Messanta-scaled.jpg'],
     category_id: '4',
     created_at: new Date().toISOString(),
     updated_at: new Date().toISOString()
@@ -317,6 +343,7 @@ export const demoProducts: Product[] = [
     description: 'Cleansing detox juice',
     price: 200,
     image_url: 'https://messanta.unitedfurniture.et/wp-content/uploads/2022/09/Detox-Messanta-scaled.jpg',
+    image_urls: ['https://messanta.unitedfurniture.et/wp-content/uploads/2022/09/Detox-Messanta-scaled.jpg'],
     category_id: '4',
     created_at: new Date().toISOString(),
     updated_at: new Date().toISOString()
@@ -327,6 +354,7 @@ export const demoProducts: Product[] = [
     description: 'Refreshing pineapple and celery juice',
         price: 200,
     image_url: 'https://messanta.unitedfurniture.et/wp-content/uploads/2022/09/Pineapple-Celery-Messanta-scaled.jpg',
+    image_urls: ['https://messanta.unitedfurniture.et/wp-content/uploads/2022/09/Pineapple-Celery-Messanta-scaled.jpg'],
     category_id: '4',
     created_at: new Date().toISOString(),
     updated_at: new Date().toISOString()
@@ -339,6 +367,7 @@ export const demoProducts: Product[] = [
     description: 'Classic French opera cake',
     price: 300,
     image_url: 'https://messanta.unitedfurniture.et/wp-content/uploads/2022/09/Opera-Messanta-scaled.jpg',
+    image_urls: ['https://messanta.unitedfurniture.et/wp-content/uploads/2022/09/Opera-Messanta-scaled.jpg'],
     category_id: '5',
     created_at: new Date().toISOString(),
     updated_at: new Date().toISOString()
@@ -349,6 +378,7 @@ export const demoProducts: Product[] = [
     description: 'Traditional Austrian sacher cake',
     price: 300,
     image_url: 'https://messanta.unitedfurniture.et/wp-content/uploads/2022/09/Sacher-Messanta-scaled.jpg',
+    image_urls: ['https://messanta.unitedfurniture.et/wp-content/uploads/2022/09/Sacher-Messanta-scaled.jpg'],
     category_id: '5',
     created_at: new Date().toISOString(),
     updated_at: new Date().toISOString()
@@ -359,6 +389,7 @@ export const demoProducts: Product[] = [
     description: 'Classic red velvet cake',
     price: 300,
     image_url: 'https://messanta.unitedfurniture.et/wp-content/uploads/2022/09/Red-Velvet-Messanta-scaled.jpg',
+    image_urls: ['https://messanta.unitedfurniture.et/wp-content/uploads/2022/09/Red-Velvet-Messanta-scaled.jpg'],
     category_id: '5',
     created_at: new Date().toISOString(),
     updated_at: new Date().toISOString()
@@ -369,6 +400,7 @@ export const demoProducts: Product[] = [
     description: 'Moist carrot cake with cream cheese frosting',
     price: 300,
     image_url: 'https://messanta.unitedfurniture.et/wp-content/uploads/2022/09/Carrot-Messanta-scaled.jpg',
+    image_urls: ['https://messanta.unitedfurniture.et/wp-content/uploads/2022/09/Carrot-Messanta-scaled.jpg'],
     category_id: '5',
     created_at: new Date().toISOString(),
     updated_at: new Date().toISOString()
@@ -379,6 +411,7 @@ export const demoProducts: Product[] = [
     description: 'Fresh baked muffin',
     price: 300,
     image_url: 'https://messanta.unitedfurniture.et/wp-content/uploads/2022/09/Muffin-Messanta-scaled.jpg',
+    image_urls: ['https://messanta.unitedfurniture.et/wp-content/uploads/2022/09/Muffin-Messanta-scaled.jpg'],
     category_id: '5',
     created_at: new Date().toISOString(),
     updated_at: new Date().toISOString()
@@ -389,6 +422,7 @@ export const demoProducts: Product[] = [
     description: 'Classic marble cake with chocolate and vanilla',
     price: 300,
     image_url: 'https://messanta.unitedfurniture.et/wp-content/uploads/2022/09/Marble-Cake-Messanta-scaled.jpg',
+    image_urls: ['https://messanta.unitedfurniture.et/wp-content/uploads/2022/09/Marble-Cake-Messanta-scaled.jpg'],
     category_id: '5',
     created_at: new Date().toISOString(),
     updated_at: new Date().toISOString()
@@ -399,6 +433,7 @@ export const demoProducts: Product[] = [
     description: 'Buttery croissant with chocolate filling',
     price: 300,
     image_url: 'https://messanta.unitedfurniture.et/wp-content/uploads/2022/09/Chocolate-Croissant-Messanta-scaled.jpg',
+    image_urls: ['https://messanta.unitedfurniture.et/wp-content/uploads/2022/09/Chocolate-Croissant-Messanta-scaled.jpg'],
     category_id: '5',
     created_at: new Date().toISOString(),
     updated_at: new Date().toISOString()
@@ -409,6 +444,7 @@ export const demoProducts: Product[] = [
     description: 'Flaky Danish pastry',
     price: 300,
     image_url: 'https://messanta.unitedfurniture.et/wp-content/uploads/2022/09/Danish-Messanta-scaled.jpg',
+    image_urls: ['https://messanta.unitedfurniture.et/wp-content/uploads/2022/09/Danish-Messanta-scaled.jpg'],
     category_id: '5',
     created_at: new Date().toISOString(),
     updated_at: new Date().toISOString()

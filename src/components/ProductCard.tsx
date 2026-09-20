@@ -1,9 +1,14 @@
-import { motion } from 'framer-motion'
+import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { motion, AnimatePresence } from 'framer-motion'
 import { Product, DailyDiscount, DailySpecial } from '../types/database'
 import { formatPrice, resolveProductImageUrl } from '../lib/utils'
-import { Star, Heart, Eye } from 'lucide-react'
+import { Star, ShoppingCart, Zap, ChevronLeft, ChevronRight } from 'lucide-react'
 import DiscountBadge, { SpecialBadge } from './DiscountBadge'
 import { calculateDiscountedPrice } from '../hooks/useSupabase'
+import { useCart } from '../context/CartContext'
+import { createOrder } from '../lib/orders'
+import toast from 'react-hot-toast'
 
 interface ProductCardProps {
   product: Product
@@ -11,85 +16,155 @@ interface ProductCardProps {
   special?: DailySpecial | null
 }
 
+function getGallery(product: Product): string[] {
+  const fromArray = (product.image_urls || []).filter(Boolean)
+  if (fromArray.length > 0) return fromArray
+  if (product.image_url) return [product.image_url]
+  return []
+}
+
 const ProductCard = ({ product, discount, special }: ProductCardProps) => {
   const discountedPrice = calculateDiscountedPrice(product.price, discount || null)
   const hasDiscount = discount && discountedPrice < product.price
+  const effectivePrice = hasDiscount ? discountedPrice : product.price
+
+  const { addItem } = useCart()
+  const navigate = useNavigate()
+  const [ordering, setOrdering] = useState(false)
+  const [slide, setSlide] = useState(0)
+
+  const gallery = getGallery(product)
+  const currentSrc = gallery[slide] || gallery[0]
+
+  const cartItem = {
+    productId: product.id,
+    name: product.name,
+    price: effectivePrice,
+    imageUrl: product.image_url || gallery[0] || null,
+  }
+
+  const handleAddToCart = () => {
+    addItem(cartItem)
+    toast.success(`${product.name} added to cart`)
+  }
+
+  const handleOrderNow = async () => {
+    setOrdering(true)
+    try {
+      const order = await createOrder([{ ...cartItem, quantity: 1 }])
+      navigate(`/order/checkout/${order.id}`)
+    } catch (err) {
+      toast.error((err as Error).message || 'Could not place order')
+    } finally {
+      setOrdering(false)
+    }
+  }
+
+  const prev = (e: React.MouseEvent) => {
+    e.stopPropagation()
+    setSlide((s) => (s - 1 + gallery.length) % gallery.length)
+  }
+
+  const next = (e: React.MouseEvent) => {
+    e.stopPropagation()
+    setSlide((s) => (s + 1) % gallery.length)
+  }
 
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      whileHover={{ 
+      whileHover={{
         y: -10,
         scale: 1.02,
-        transition: { duration: 0.2 }
+        transition: { duration: 0.2 },
       }}
       className="group relative bg-white rounded-3xl shadow-xl overflow-hidden hover:shadow-2xl transition-all duration-300 border border-gray-100"
     >
-      {/* Image Container with Overlay */}
-      <div className="relative aspect-square overflow-hidden">
-        {product.image_url ? (
-          <img
-            src={resolveProductImageUrl(product.image_url)}
-            alt={product.name}
-            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-            loading="eager"
-            decoding="async"
-          />
+      <div className="relative aspect-square overflow-hidden bg-gradient-to-br from-amber-50 to-orange-50">
+        {currentSrc ? (
+          <AnimatePresence mode="wait">
+            <motion.img
+              key={currentSrc}
+              src={resolveProductImageUrl(currentSrc)}
+              alt={product.name}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              className="w-full h-full object-cover"
+              loading="eager"
+              decoding="async"
+            />
+          </AnimatePresence>
         ) : (
-          <div className="w-full h-full bg-gradient-to-br from-amber-100 via-orange-100 to-red-100 flex items-center justify-center">
+          <div className="w-full h-full flex items-center justify-center">
             <span className="text-6xl opacity-60">☕</span>
           </div>
         )}
-        
-        {/* Gradient Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-        
-        {/* Badges - Top Left */}
-        <div className="absolute top-4 left-4 flex flex-col space-y-2">
-          {hasDiscount && (
-            <DiscountBadge discount={discount} size="sm" />
-          )}
-          {special && (
-            <SpecialBadge label={special.special_label} size="sm" />
-          )}
-        </div>
 
-        {/* Action Buttons - Top Right */}
-        <div className="absolute top-4 right-4 flex flex-col space-y-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-          <button className="p-2 bg-white/90 backdrop-blur-sm rounded-full shadow-lg hover:bg-white transition-colors duration-200">
-            <Heart className="h-4 w-4 text-gray-600 hover:text-red-500" />
-          </button>
-          <button className="p-2 bg-white/90 backdrop-blur-sm rounded-full shadow-lg hover:bg-white transition-colors duration-200">
-            <Eye className="h-4 w-4 text-gray-600 hover:text-blue-500" />
-          </button>
+        {gallery.length > 1 && (
+          <>
+            <button
+              type="button"
+              onClick={prev}
+              className="absolute left-2 top-1/2 -translate-y-1/2 z-10 p-1.5 rounded-full bg-black/40 text-white hover:bg-black/60 transition-colors"
+              aria-label="Previous image"
+            >
+              <ChevronLeft className="h-4 w-4" />
+            </button>
+            <button
+              type="button"
+              onClick={next}
+              className="absolute right-2 top-1/2 -translate-y-1/2 z-10 p-1.5 rounded-full bg-black/40 text-white hover:bg-black/60 transition-colors"
+              aria-label="Next image"
+            >
+              <ChevronRight className="h-4 w-4" />
+            </button>
+            <div className="absolute bottom-3 left-0 right-0 flex justify-center gap-1.5 z-10">
+              {gallery.map((_, i) => (
+                <button
+                  key={i}
+                  type="button"
+                  onClick={(e) => {
+                    e.stopPropagation()
+                    setSlide(i)
+                  }}
+                  className={`h-1.5 rounded-full transition-all ${
+                    i === slide ? 'w-5 bg-white' : 'w-1.5 bg-white/50'
+                  }`}
+                  aria-label={`Image ${i + 1}`}
+                />
+              ))}
+            </div>
+          </>
+        )}
+
+        <div className="absolute top-4 left-4 flex flex-col space-y-2 z-10">
+          {hasDiscount && <DiscountBadge discount={discount} size="sm" />}
+          {special && <SpecialBadge label={special.special_label} size="sm" />}
         </div>
       </div>
-      
-      {/* Content */}
+
       <div className="p-6">
-        {/* Product Name */}
         <h3 className="text-xl font-sora font-bold text-gray-900 mb-3 group-hover:text-amber-600 transition-colors duration-200">
           {product.name}
         </h3>
-        
-        {/* Description */}
+
         {product.description && (
           <p className="text-gray-600 text-sm mb-4 line-clamp-2 font-sora font-light leading-relaxed">
             {product.description}
           </p>
         )}
 
-        {/* Rating */}
         <div className="flex items-center space-x-1 mb-4">
           {[...Array(5)].map((_, i) => (
             <Star key={i} className="h-4 w-4 fill-yellow-400 text-yellow-400" />
           ))}
           <span className="text-sm text-gray-500 font-sora font-medium ml-2">4.8</span>
         </div>
-        
-        {/* Price and Action */}
-        <div className="flex items-center justify-between">
+
+        <div className="flex items-center justify-between mb-4">
           <div className="flex flex-col">
             {hasDiscount ? (
               <>
@@ -113,11 +188,25 @@ const ProductCard = ({ product, discount, special }: ProductCardProps) => {
             )}
           </div>
         </div>
-      </div>
 
-      {/* Decorative Elements */}
-      <div className="absolute -top-2 -right-2 w-20 h-20 bg-gradient-to-br from-amber-200/20 to-orange-200/20 rounded-full blur-xl group-hover:scale-150 transition-transform duration-500"></div>
-      <div className="absolute -bottom-2 -left-2 w-16 h-16 bg-gradient-to-br from-yellow-200/20 to-amber-200/20 rounded-full blur-lg group-hover:scale-125 transition-transform duration-500"></div>
+        <div className="flex gap-2">
+          <button
+            onClick={handleAddToCart}
+            className="flex-1 flex items-center justify-center gap-2 py-2.5 px-3 border-2 border-amber-400 text-amber-700 font-sora font-semibold rounded-xl hover:bg-amber-50 transition-colors text-sm"
+          >
+            <ShoppingCart className="h-4 w-4" />
+            Add
+          </button>
+          <button
+            onClick={handleOrderNow}
+            disabled={ordering}
+            className="flex-1 flex items-center justify-center gap-2 py-2.5 px-3 bg-gradient-to-r from-yellow-400 to-amber-500 text-black font-sora font-semibold rounded-xl hover:from-yellow-500 hover:to-amber-600 transition-all text-sm disabled:opacity-60"
+          >
+            <Zap className="h-4 w-4" />
+            {ordering ? '...' : 'Order'}
+          </button>
+        </div>
+      </div>
     </motion.div>
   )
 }
